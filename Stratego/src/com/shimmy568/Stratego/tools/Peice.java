@@ -170,10 +170,14 @@ public class Peice {
 	 * @return
 	 */
 	public static int challange(Peice[][] board, int startX, int startY, int type){
-		if((type == 11 && board[startX][startY].getType() == 3) || (type == 3 && board[startX][startY].getType() == 11)){
+		if(type == 11 && board[startX][startY].getType() == 3){
 			return 1;
-		}else if((type == 10 && board[startX][startY].type == 1) || (type == 1 && board[startX][startY].type == 10)){
+		}else if((type == 10 && board[startX][startY].type == 1)){
 			return 1;
+		}else if(type == 3 && board[startX][startY].getType() == 11){
+			return 3;
+		}else if(type == 1 && board[startX][startY].type == 10){
+			return 3;
 		}		
 		if(board[startX][startY].type > type){
 			return 1;

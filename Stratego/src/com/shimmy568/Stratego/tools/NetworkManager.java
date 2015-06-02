@@ -13,7 +13,7 @@ import java.net.Socket;
  */
 public class NetworkManager {
 
-	public boolean setupComp, moveMade, challMade, DX, responce;
+	public boolean setupComp, moveMade, challMade, DX, responce, win;
 	final int PORT = 23432; //the port that the program uses to communicate
 	
 	//the objects used to communicate
@@ -82,6 +82,11 @@ public class NetworkManager {
 		if(status.startsWith("HAHA I WIN")){
 			DX = true;
 			return;
+		}
+		
+		//if the other player cant move this is called
+		if(status.startsWith("CANTMOVE")){
+			win = true;
 		}
 		
 		System.out.println("Error invalid status");

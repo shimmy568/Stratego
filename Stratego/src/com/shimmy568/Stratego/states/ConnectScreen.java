@@ -1,5 +1,7 @@
 package com.shimmy568.Stratego.states;
 
+import java.net.BindException;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -29,7 +31,7 @@ public class ConnectScreen extends BasicGameState{
 	
 	//other varibles used in multiple methods
 	int state = 0, timeToStart;
-	boolean connecting, startGame, enterPressed, clicked;
+	boolean connecting, startGame, enterPressed, clicked, twoRunning;
 	String username;
 	
 	
@@ -64,7 +66,8 @@ public class ConnectScreen extends BasicGameState{
 			g.drawString("Enter Host IP",(Game.SCREENX - 118) / 2 , 150);
 			tfIP.render(container, g);
 		}else if(state == 3){ // the state for the host
-			
+			if(twoRunning)
+					g.drawString("Port in use", (Game.SCREENX - g.getFont().getWidth("Port in use")) / 2, (Game.SCREENY - g.getFont().getHeight("aA")) / 2);
 		}else{//this is a sort of state 0 for the username but this was more efficent
 			tfUsername.render(container, g);
 			g.drawString("Enter Username", (Game.SCREENX - 128) / 2, tfUsername.getY() - 30);
@@ -127,7 +130,7 @@ public class ConnectScreen extends BasicGameState{
 				connecting = false;
 			}
 		}else if(state == 3){ // the state for the host 
-			if(!connecting){ //checks if the connecting process has started and if not starts it
+			if(!connecting && !twoRunning){ //checks if the connecting process has started and if not starts it
 				connecter = new Thread(new Connecter("Player 1"));
 				connecter.start();
 				connecting = true;
@@ -139,6 +142,7 @@ public class ConnectScreen extends BasicGameState{
 				state = 1;
 				clicked = true;
 				connecting = false;
+				twoRunning = false;
 			}
 
 		}else{ //this agians acts as the 0 state the same as the render method
@@ -170,7 +174,9 @@ public class ConnectScreen extends BasicGameState{
 	//if the client couldn't connect the the server we put a message in the textfeild and stop the loading icon
 	public void timedOut(){
 		connecting = false;
-		tfIP.setText("Couldn't Connect");
+		if(state == 2){
+			tfIP.setText("Couldn't Connect");
+		}
 		pacmanLoading.stop();
 	}
 	
@@ -224,10 +230,13 @@ public class ConnectScreen extends BasicGameState{
 				try {
 					Game.network = new NetworkManagerHost();
 					connected();
-				} catch (Exception e) { //if an error occurs we time out and exit
+				} catch(BindException e){
+					twoRunning = true;
+					timedOut();
+				}catch (Exception e) { //if an error occurs we time out and exit
 					e.printStackTrace();
 					timedOut();
-				}
+				} 
 			}else{
 				try {
 					Game.network = new NetworkManagerClient(ip);

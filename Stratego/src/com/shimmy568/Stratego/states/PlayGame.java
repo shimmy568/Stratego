@@ -79,11 +79,32 @@ public class PlayGame extends BasicGameState{
 			game.enterState(4);
 		}
 		
+		//if they cant make anymoves you win
+		if(Game.network.win){
+			game.enterState(3);
+		}
+		
 		//if you capture the flag you tell the other player you win and enter the winning state
 		if(sideBarCounter[0] == 1 && state != 0){
 			Game.network.sendMsg("HAHA I WIN");
 			game.enterState(3);
 		}
+		//checking if player can't make any moves and if so they lose
+		if(state == 2 && state == 3){
+			boolean canMove = false;
+			for(int x = 0; x < 10; x++){
+				for(int y = 0; y < 10; y++){
+					if(movePossible(new int[]{x, y}) == true){
+						canMove = true;
+					}
+				}
+			}
+			if(!canMove){
+				Game.network.sendMsg("CANTMOVE");
+				game.enterState(4);
+			}
+		}
+		
 		
 		setMouse(container.getInput()); //getting mouse input
 		
@@ -462,7 +483,7 @@ public class PlayGame extends BasicGameState{
 			return;
 		}
 		//if a move isn't possible to make on the current move location it turns red
-		if(!movePossible() && !makingMove){
+		if(!movePossible(mouseToBoardCord(mouseCord)) && !makingMove){
 			highlightColor = Color.red;
 		}else if(!Peice.isValidMove(board, movePos[0][0], movePos[0][1], mouseToBoardCord(mouseCord)[0], mouseToBoardCord(mouseCord)[1]) && makingMove){ 
 			//if the first peice has been selected a diffrent method must be employed as the first method
@@ -527,8 +548,7 @@ public class PlayGame extends BasicGameState{
 	 * checks if a move can be made from a spot
 	 * @return if the move is possible and if it is returns true
 	 */
-	private boolean movePossible(){
-		int[] cord = mouseToBoardCord(mouseCord);
+	private boolean movePossible(int[] cord){
 		
 		//if the mouse is off the screen reutrns false
 		if(cord[0] == -2){
