@@ -1,0 +1,12 @@
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/Game.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/tools/NetworkManagerClient.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/states/EndGameLose.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/states/Menu.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/tools/Button.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/tools/NetworkManager.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/tools/Peice.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/App.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/states/PlayGame.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/states/EndGameWin.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/tools/NetworkManagerHost.java
+/home/owen/Documents/projects/Stratego/src/main/java/com/shimmy568/Stratego/states/ConnectScreen.java
