@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.shimmy568.Stratego.AppTest" time="0.013" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.shimmy568.Stratego.AppTest" time="0.005" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk1.8.0_191/jre/lib/amd64"/>
@@ -61,5 +61,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.shimmy568.Stratego.AppTest" name="testApp" time="0.013"/>
+  <testcase classname="com.shimmy568.Stratego.AppTest" name="testApp" time="0.005"/>
 </testsuite>
